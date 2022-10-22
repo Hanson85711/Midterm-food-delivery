@@ -1,3 +1,3 @@
 -- Users table seeds here (Example)
-INSERT INTO users (name) VALUES ('Alice');
-INSERT INTO users (name) VALUES ('Kira');
+INSERT INTO users (name, type, phone) VALUES ('Igor', admin, 'twilio');
+INSERT INTO users (name, type, phone) VALUES ('Kira', admin, 'twilio');
