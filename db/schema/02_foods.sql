@@ -9,5 +9,5 @@ CREATE TABLE foods (
   category VARCHAR(255) NOT NULL,
   pic VARCHAR(255) NOT NULL,
   desc TEXT,
-  price INT
+  price DECIMAL(4, 2) NOT NULL
 );
