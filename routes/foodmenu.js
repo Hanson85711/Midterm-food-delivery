@@ -22,6 +22,10 @@ router.get('/', (req, res) => {
   res.render('testfoods');
 });
 
+router.get('/fix', (req, res) => {
+  res.render('testfoods');
+});
+
 module.exports = router;
 
 
