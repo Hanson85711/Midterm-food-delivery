@@ -20,7 +20,7 @@ $font-small-text: 20px;
 
 
 
-body {
+
   // display: flex;
   // flex-direction: column;
   // justify-content: center;
@@ -35,7 +35,7 @@ body {
   //     $base-color4 59%,
   //     $base-color5 74%,
   //     $base-color6 100%);
-}
+
 
 header {
   nav {
@@ -84,10 +84,7 @@ main {
   justify-content: center;
   width: 100%;
 
-  section {
-    // display: flex;
-    // flex-direction: column;
-  }
+
   .category-title {
     text-align: center;
     font-size: 26px;
