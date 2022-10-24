@@ -90,6 +90,7 @@ main {
   }
   .category-title {
     text-align: center;
+    font-size: 26px;
   }
   .category-main .category-row {
     display: flex;
@@ -100,6 +101,19 @@ main {
     .category-item {
       text-align: center;
       list-style: none;
+    }
+    .category-item-name{
+      font-weight: 600;
+      font-size: 24px;
+      margin: 10px 0;
+    }
+    .category-item-price{
+      font-weight: 600;
+
+      margin: 10px 0;
+    }
+    .category-item-img img{
+      width: 50%;
     }
   }
 }

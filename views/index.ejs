@@ -24,32 +24,25 @@
   <section class = "categories">
     <div class ="category-title">
       <h2>Snacks</h2>
+
     </div>
     <div class="category-main">
       <ul class="category-row">
+        <% for (const food of myFoods) { %>
         <li class="category-item">
-          <div class="category-item-img"><img src="../images/mcd_cupcake.jpeg"></div>
-          <div class="category-item-name">Item name</div>
-          <div class="category-item-descriptions">Item description</div>
-          <div class="category-item-price">Item price</div>
+          <div class="category-item-img"><img src = <%= food.pic %>/></div>
+          <div class="category-item-name"> <%= food.name %></div>
+          <div class="category-item-descriptions"><%= food.description %></div>
+          <div class="category-item-price">$<%= food.price %></div>
+          <button id="test-orders">Add to cart</button>
+          <ul id="users"></ul>
         </li>
-        <li class="category-item">
-          <div class="category-item-img"><img src="../images/mcd_cupcake.jpeg"></div>
-          <div class="category-item-name">Item name</div>
-          <div class="category-item-descriptions">Item description</div>
-          <div class="category-item-price">Item price</div>
-        </li>
-        <li class="category-item">
-          <div class="category-item-img"><img src="../images/mcd_cupcake.jpeg"></div>
-          <div class="category-item-name">Item name</div>
-          <div class="category-item-descriptions">Item description</div>
-          <div class="category-item-price">Item price</div>
-        </li>
+        <% } %>
       </ul>
     </div>
+
   </section>
 </main>
-
 
 </body>
 

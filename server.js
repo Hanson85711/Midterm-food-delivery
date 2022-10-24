@@ -53,7 +53,7 @@ app.use('/api/orders', orderApiRoutes);
 
 app.get('/', async (req, res) => {
   const myFoods = await getFoods();
-  console.log('My Foods: ', myFoods);
+  //console.log('My Foods: ', myFoods);
   const templateVars = {
     myFoods
   }
