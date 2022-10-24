@@ -35,6 +35,7 @@ const orderApiRoutes = require('./routes/order-api');
 const widgetApiRoutes = require('./routes/widgets-api');
 const usersRoutes = require('./routes/users');
 const foodmenuRoutes = require('./routes/foodmenu');
+const { getFoods } = require('./db/queries/foods');
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
@@ -50,8 +51,13 @@ app.use('/api/orders', orderApiRoutes);
 // Warning: avoid creating more routes in this file!
 // Separate them into separate routes files (see above).
 
-app.get('/', (req, res) => {
-  res.render('index');
+app.get('/', async (req, res) => {
+  const myFoods = await getFoods();
+  console.log('My Foods: ', myFoods);
+  const templateVars = {
+    myFoods
+  }
+  res.render('index', templateVars);
 });
 
 app.get('/login/:userId', (req, res) => {
