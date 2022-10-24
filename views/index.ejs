@@ -15,10 +15,41 @@
 
   <script src="/vendor/jquery-3.0.0.js"></script>
   <script defer src="/scripts/app.js"></script>
+
+  <script type="text/javascript" src="/scripts/test.js"></script>
 </head>
 
 <body>
-  <h1>Have fun! 🥔</h1>
+  <%- include('./partials/_header') %>
+  <main>
+  <section class = "categories">
+    <div class ="category-title">
+      <h2>Snacks</h2>
+    </div>
+    <div class="category-main">
+      <ul class="category-row">
+        <li class="category-item">
+          <div class="category-item-img"><img src="../images/mcd_cupcake.jpeg"></div>
+          <div class="category-item-name">Item name</div>
+          <div class="category-item-descriptions">Item description</div>
+          <div class="category-item-price">Item price</div>
+        </li>
+        <li class="category-item">
+          <div class="category-item-img"><img src="../images/mcd_cupcake.jpeg"></div>
+          <div class="category-item-name">Item name</div>
+          <div class="category-item-descriptions">Item description</div>
+          <div class="category-item-price">Item price</div>
+        </li>
+        <li class="category-item">
+          <div class="category-item-img"><img src="../images/mcd_cupcake.jpeg"></div>
+          <div class="category-item-name">Item name</div>
+          <div class="category-item-descriptions">Item description</div>
+          <div class="category-item-price">Item price</div>
+        </li>
+      </ul>
+    </div>
+  </section>
+</main>
 </body>
 
 </html>
