@@ -1,3 +1,25 @@
+$base-color1: #56200B;
+$base-color2: #7B2C13;
+$base-color3: #B14424;
+$base-color4: #D35721;
+$base-color5: #F17E23;
+$base-color6: #FBA11C;
+$font-white: #fff;
+$font-gray: rgb(80, 78, 78);
+$font-black: #000;
+$font-header: 32px;
+$font-description: 24px;
+$font-small-text: 20px;
+
+// $base-color1: #090B06;
+// $base-color2: #1B3711;
+// $base-color3: #2A5420;
+// $base-color4: #F5D913;
+// $base-color5: #EB912D;
+// $base-color6: #F46D0E;
+
+
+
 body {
   // display: flex;
   // flex-direction: column;
@@ -5,33 +27,79 @@ body {
   // align-items: center;
   // min-height: 100vh;
 
-  background: #f17e23;
-  background: linear-gradient(
-    227deg,
-    rgb(244, 177, 115) 0%,
-    #e19839 20%,
-    rgb(237, 162, 1) 34%,
-    rgb(241, 116, 21) 59%,
-    rgb(240, 116, 88) 74%,
-    rgb(241, 106, 52) 100%
-  );
+  // background: $base-color6;
+  // background: linear-gradient(227deg,
+  //     $base-color1 0%,
+  //     $base-color2 20%,
+  //     $base-color3 34%,
+  //     $base-color4 59%,
+  //     $base-color5 74%,
+  //     $base-color6 100%);
 }
-header{
 
+header {
+  nav {
+    display: flex;
+    justify-content: space-between;
+    margin: 3em;
+
+    .header-categories {
+      display: inline-flex;
+      align-items: center;
+    }
+    .header-logo {
+      display: inline-flex;
+      align-items: center;
+    }
+    .header-logo img {
+      height: 100px;
+    }
+    .cart-button{
+      font-size: 20px;
+      padding: 10px;
+      background-color: $base-color4;
+      border: navajowhite;
+      border-radius: 10px;
+
+      a {
+        color:$font-white;
+      }
+    }
+    span {
+      color: $font-gray;
+      font-size: $font-header;
+      font-weight: 600;
+    }
+  }
+  a {
+    color: $font-gray;
+    text-decoration: none;
+    font-size: $font-description;
+    margin: 0 20px;
+  }
 }
-nav{
-  margin: 25px;
-}
-header span{
-  font-size: 30px;
-  font-weight: 700;
-}
-header a{
-  text-decoration: none;
-  color:white;
-  float: right;
-}
-main h1{
-  display: flex;
+main {
+  display: inline-block;
+  flex-direction: row;
   justify-content: center;
+  width: 100%;
+
+  section {
+    // display: flex;
+    // flex-direction: column;
+  }
+  .category-title {
+    text-align: center;
+  }
+  .category-main .category-row {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-around;
+
+    .category-item {
+      text-align: center;
+      list-style: none;
+    }
+  }
 }
