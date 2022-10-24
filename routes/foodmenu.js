@@ -18,7 +18,7 @@ router.get('/foods/:id', (req, res) => {
 });
 
 //TestPage
-router.get('/checkout', (req, res) => {
+router.get('/', (req, res) => {
   res.render('testfoods');
 });
 
