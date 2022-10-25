@@ -33,6 +33,7 @@ app.use(express.static('public'));
 const userApiRoutes = require('./routes/users-api');
 const orderApiRoutes = require('./routes/order-api');
 const widgetApiRoutes = require('./routes/widgets-api');
+const foodApiRoutes = require('./routes/food-api');
 const usersRoutes = require('./routes/users');
 const foodmenuRoutes = require('./routes/foodmenu');
 const { getFoods } = require('./db/queries/foods');
@@ -45,6 +46,7 @@ app.use('/api/widgets', widgetApiRoutes);
 app.use('/users', usersRoutes);
 app.use('/testfoods', foodmenuRoutes);
 app.use('/api/orders', orderApiRoutes);
+app.use('/api/foods', foodApiRoutes);
 // Note: mount other resources here, using the same pattern above
 
 // Home page
@@ -52,12 +54,13 @@ app.use('/api/orders', orderApiRoutes);
 // Separate them into separate routes files (see above).
 
 app.get('/', async (req, res) => {
-  const myFoods = await getFoods();
-  //console.log('My Foods: ', myFoods);
-  const templateVars = {
-    myFoods
-  }
-  res.render('index', templateVars);
+  // const myFoods = await getFoods();
+  // //console.log('My Foods: ', myFoods);
+  // const templateVars = {
+  //   myFoods
+  // }
+  // res.render('index', templateVars);
+  res.render('index');
 });
 
 app.get('/login/:userId', (req, res) => {

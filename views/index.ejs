@@ -15,6 +15,8 @@
 
   <script src="/vendor/jquery-3.0.0.js"></script>
   <script defer src="/scripts/app.js"></script>
+
+  <script type="module" src="/scripts/index-renderer.js"></script>
 </head>
 
 <body>
@@ -28,16 +30,6 @@
     </div>
     <div class="category-main">
       <ul class="category-row">
-        <% for (const food of myFoods) { %>
-        <li class="category-item">
-          <div class="category-item-img"><img src = <%= food.pic %>/></div>
-          <div class="category-item-name"> <%= food.name %></div>
-          <div class="category-item-descriptions"><%= food.description %></div>
-          <div class="category-item-price">$<%= food.price %></div>
-          <button id="test-orders">Add to cart</button>
-          <ul id="users"></ul>
-        </li>
-        <% } %>
       </ul>
     </div>
   </section>

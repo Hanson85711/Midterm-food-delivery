@@ -7,12 +7,9 @@ const pool = new Pool({
 });
 
 //Adds Food to Order Database
-const addOrder = function(property) {
-  console.log(property);
-  let params = [];
-  for (const key in property) {
-    params.push(property[key]);
-  }
+const addOrder = function(parameters) {
+  console.log(parameters);
+  let params = parameters;
   return pool
   .query(`INSERT INTO orders(food_id, user_id) RETURNING *;`, params)
   .then((result) => {
@@ -24,3 +21,5 @@ const addOrder = function(property) {
   });
 }
 exports.addOrder = addOrder;
+
+
