@@ -1,9 +1,7 @@
 $(document).ready(function() {
   const $foodContainer = $('.category-row');
   let buttons = [];
-
   let userId;
-
 
   //Initial renders of foods from server
   const loadFoods = function() {

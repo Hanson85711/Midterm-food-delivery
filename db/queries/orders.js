@@ -11,4 +11,16 @@ const getOrders = (userid) => {
     });
 };
 
-module.exports = { getOrders };
+const getFinalTotal = (userid) => {
+  return db.query(`SELECT SUM(total_price) as final_price
+  FROM (SELECT SUM(foods.price) as total_price
+  FROM orders
+  JOIN foods ON foods.id = food_id
+  WHERE orders.user_id = 2
+  GROUP BY foods.name, orders.user_id) foo;`)
+    .then(data => {
+      return data.rows;
+    });
+};
+
+module.exports = { getOrders, getFinalTotal };

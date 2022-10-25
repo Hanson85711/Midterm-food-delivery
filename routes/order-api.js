@@ -20,4 +20,18 @@ router.get('/', (req, res) => {
     });
 });
 
+router.get('/final', (req, res) => {
+  const userId = req.cookies; //Have to obtain user ID param with this
+  console.log(userId['user_id']);
+  orderQueries.getFinalTotal(userId['user_id'])
+    .then(final => {
+      res.json({ final });
+    })
+    .catch(err => {
+      res
+        .status(500)
+        .json({ error: err.message });
+    });
+});
+
 module.exports = router;

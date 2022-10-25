@@ -2,13 +2,13 @@
 
 //Test Button Click for getting from order database
 $(document).ready(function() {
+  const $ordersList = $('#orders');
   const loadCart = function() {
       $.ajax({
         method: 'GET',
         url: '/api/orders'
       })
       .done((response) => {
-        const $ordersList = $('#orders');
         $ordersList.empty();
 
         for(const order of response.orders) {
@@ -18,5 +18,20 @@ $(document).ready(function() {
       });
   };
 
+  const getFinalPrice = function() {
+    $.ajax({
+      method: 'GET',
+      url: '/api/orders/final'
+    })
+    .done((response) => {
+      for(const order of response.final) {
+        console.log(order);
+        $(`<li class="order">`).text("Final Price: " + order.final_price).appendTo($ordersList);
+      }
+    });
+  }
+
   loadCart();
+  getFinalPrice();
 });
+
