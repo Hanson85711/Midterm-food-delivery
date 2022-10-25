@@ -26,6 +26,20 @@ router.get('/fix', (req, res) => {
   res.render('testfoods');
 });
 
+router.post('/orders', (req, res) => {
+  const userId = req.session.userId;
+  console.log(req);
+  console.log(res);
+  database.addOrder(1, userId)
+    .then(food => {
+      res.send(food);
+    })
+    .catch(e => {
+      console.error(e);
+      res.send(e)
+    });
+});
+
 module.exports = router;
 
 

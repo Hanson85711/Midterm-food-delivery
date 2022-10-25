@@ -54,12 +54,13 @@ app.use('/api/foods', foodApiRoutes);
 // Separate them into separate routes files (see above).
 
 app.get('/', async (req, res) => {
-  const myFoods = await getFoods();
-  console.log('My Foods: ', myFoods);
-  const templateVars = {
-    myFoods
-  }
-  res.render('index', templateVars);
+  // const myFoods = await getFoods();
+  // //console.log('My Foods: ', myFoods);
+  // const templateVars = {
+  //   myFoods
+  // }
+  // res.render('index', templateVars);
+  res.render('index');
 });
 
 app.get('/login/:userId', (req, res) => {
