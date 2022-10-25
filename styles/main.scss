@@ -36,12 +36,14 @@ $font-small-text: 20px;
   //     $base-color5 74%,
   //     $base-color6 100%);
 
-
+a{
+  text-decoration: none;
+}
 header {
   nav {
     display: flex;
     justify-content: space-between;
-    margin: 3em;
+    margin: 1em 2em;
 
     .header-categories {
       display: inline-flex;
@@ -52,11 +54,11 @@ header {
       align-items: center;
     }
     .header-logo img {
-      height: 100px;
+      height: 120px;
     }
     .cart-button{
-      font-size: 20px;
-      padding: 10px;
+      font-size: 22px;
+      padding: 0.5em 1em;
       background-color: $base-color4;
       border: navajowhite;
       border-radius: 10px;
@@ -69,9 +71,14 @@ header {
       color: $font-gray;
       font-size: $font-header;
       font-weight: 600;
+      margin-left: 0.5em;
+
+      a {
+        color:$font-gray
+      }
     }
   }
-  a {
+  .category-button {
     color: $font-gray;
     text-decoration: none;
     font-size: $font-description;
@@ -98,32 +105,90 @@ main {
     .category-item {
       text-align: center;
       list-style: none;
+      border: 1px #d7d7d7 solid;
+      margin: 2em;
+      padding: 3em;
+      border-radius: 10px;
     }
     .category-item-name{
       font-weight: 600;
       font-size: 24px;
-      margin: 10px 0;
+      margin: 1em 0;
+    }
+    .category-item-descriptions{
+      margin: 1em 0;
     }
     .category-item-price{
       font-weight: 600;
-
+      font-size: 20px;
       margin: 10px 0;
     }
     .category-item-img img{
       width: 50%;
+    }
+    .menu-button{
+      font-size: 20px;
+      padding: 10px;
+      background-color: #D35721;
+      border: navajowhite;
+      border-radius: 10px;
+      color: #fff;
+      margin-top: 1em;
     }
   }
 }
 .cart {
   display: flex;
   flex-direction: column;
-  text-align: center;
+  margin-bottom: 10em;
 
-  .order {
-    list-style: none;
-    border: 1px #c5b9b9 solid;
-    border-radius: 7px;
-    margin: 2em;
-    padding: 2em;
+  #orders{
+    width: 80%;
+    margin: auto;
   }
+  #place-order{
+    float: right;
+    width: 10%;
+    padding: 10px 15px;
+    margin: 2em 12rem 2em 0;
+    font-size: 20px;
+    background-color: #D35721;
+    border: navajowhite;
+    border-radius: 10px;
+    color:$font-white;
+  }
+  .order{
+    margin-right: 2em;
+    text-align: right;
+    font-size: 26px;
+  }
+  .cart-title {
+    text-align: center;
+  }
+  .cart-item{
+    list-style: none;
+    border: 1px #bfb8b8 solid;
+    border-radius: 10px;
+    margin: 2em;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    font-size: 20px;
+    align-items: center;
+    box-shadow: 7px 7px #e8dcdc;
+  }
+  .cart-item-image {
+    width: 15%;
+    padding: 5px 0 10px 0;
+  }
+  .cart-item-name{
+    margin: 0 -7em 0 -7em;
+  }
+.cart-item-count{
+  border: 1px #ada0a0 solid;
+  border-radius: 10px;
+}
+i {
+  padding: 1em;
+}
 }

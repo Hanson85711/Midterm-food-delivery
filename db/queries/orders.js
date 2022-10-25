@@ -1,11 +1,12 @@
 const db = require('../connection');
 
 const getOrders = (userid) => {
-  return db.query(`SELECT foods.name as food, orders.user_id, count(orders.*), SUM(foods.price) as total_price
+  return db.query(`SELECT foods.name as food, orders.user_id, count(orders.*), SUM(foods.price) as total_price,
+  foods.pic as pic
   FROM orders
   JOIN foods ON foods.id = food_id
   WHERE orders.user_id = ${userid}
-  GROUP BY foods.name, orders.user_id;`)
+  GROUP BY foods.name, orders.user_id, foods.pic;`)
     .then(data => {
       return data.rows;
     });
@@ -23,4 +24,7 @@ const getFinalTotal = (userid) => {
     });
 };
 
-module.exports = { getOrders, getFinalTotal };
+
+
+
+module.exports = { getOrders, getFinalTotal, deleteItem };

@@ -12,6 +12,8 @@
   <link rel="stylesheet" href="/vendor/border-box.css" />
   <link rel="stylesheet" href="/styles/main.css" />
   <link rel="stylesheet" href="/styles/layout.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
 
   <script src="/vendor/jquery-3.0.0.js"></script>
   <script defer src="/scripts/app.js"></script>
@@ -21,15 +23,15 @@
   <%- include('./partials/_header') %>
   <section class = "cart">
     <div class ="cart-title">
-  <h1>My Cart</h1>
+  <h1>Order summary</h1>
   </div>
   <div class="cart-main">
-    <button id="test-orders">Adding items to cart</button>
-    <ul id="orders"></ul>
-    <h3>Total:</h3>
+    <!-- <button id="test-orders">Adding items to cart</button> -->
+    <ul id="orders">
+    </ul>
+
     <button id ="place-order">Place order</button>
   </div>
-
   </section>
 </body>
 
