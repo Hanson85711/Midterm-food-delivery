@@ -27,4 +27,4 @@ const getFinalTotal = (userid) => {
 
 
 
-module.exports = { getOrders, getFinalTotal, deleteItem };
+module.exports = { getOrders, getFinalTotal };
