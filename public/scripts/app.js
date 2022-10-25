@@ -5,19 +5,14 @@
 //Test Button Click for getting from order database
 $(document).ready(function () {
   const $ordersList = $('#orders');
-  const loadCart = function () {
-    $.ajax({
-      method: 'GET',
-      url: '/api/orders'
-    })
-      .done((response) => {
+
+
+  const loadCart = function() {
+    return $.get('/api/orders')
+      .then((response) => {
         $ordersList.empty();
-
         for (const order of response.orders) {
-          //console.log("order", response);
-
-
-          // $(`<li class="order">`).text(order.food + " " + "Quantity: x" + order.count + " Price: " + order.total_price).appendTo($ordersList);
+          console.log(order);
 
           const $cartItems = $(`
           <li class="cart-item">
@@ -34,22 +29,19 @@ $(document).ready(function () {
       });
   };
 
-  const getFinalPrice = function () {
-    $.ajax({
-      method: 'GET',
-      url: '/api/orders/final'
-    })
-      .done((response) => {
+  const getFinalPrice = function() {
+    return $.get('/api/orders/final')
+      .then((response) => {
         for (const order of response.final) {
-          //console.log(order);
-          $(`<div class="order">`).text("Total Price : $" + order.final_price).appendTo($ordersList);
+          console.log(order);
+          $(`<li class="order">`).text("Final Price: " + order.final_price).appendTo($ordersList);
         }
       });
-  }
+  };
 
-
-  loadCart();
-  getFinalPrice();
-
+  loadCart()
+    .then(() => {
+      getFinalPrice();
+    });
 });
 
