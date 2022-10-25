@@ -13,7 +13,6 @@ $(document).ready(function () {
         $ordersList.empty();
         for (const order of response.orders) {
           console.log(order);
-
           const $cartItems = $(`
           <li class="cart-item">
          <img class="cart-item-image" src=${order.pic}/>
