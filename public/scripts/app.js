@@ -19,9 +19,9 @@ $(document).ready(function () {
          <img class="cart-item-image" src=${order.pic}/>
           <div class="cart-item-name"> ${order.food}</div>
           <div class="cart-item-count-icon"></div>
-          <div class="cart-item-count"> <i class="fa-solid fa-circle-minus"></i>${order.count}<i class="fa-solid fa-circle-plus"></i></div>
+          <div class="cart-item-count"><button id="count-increment"> <i class="fa-solid fa-circle-minus"></i></button>${order.count}<button id="count-increment"><i class="fa-solid fa-circle-plus"></button></i></div>
           <div class="category-item-price">$${order.total_price}</div>
-          <div><i class="fa-solid fa-trash"></i></div>
+          <div><button id="delete-button"> <i class="fa-solid fa-trash"></i></button></div>
         </li>
         `);
           $cartItems.appendTo($ordersList);

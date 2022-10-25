@@ -24,7 +24,4 @@ const getFinalTotal = (userid) => {
     });
 };
 
-
-
-
 module.exports = { getOrders, getFinalTotal };
