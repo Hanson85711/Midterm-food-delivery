@@ -114,3 +114,16 @@ main {
     }
   }
 }
+.cart {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+
+  .order {
+    list-style: none;
+    border: 1px #c5b9b9 solid;
+    border-radius: 7px;
+    margin: 2em;
+    padding: 2em;
+  }
+}

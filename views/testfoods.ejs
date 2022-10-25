@@ -18,9 +18,19 @@
 </head>
 
 <body>
-  <h1>Test Food Orders</h1>
-  <button id="test-orders">Adding items to cart</button>
-  <ul id="orders"></ul>
+  <%- include('./partials/_header') %>
+  <section class = "cart">
+    <div class ="cart-title">
+  <h1>My Cart</h1>
+  </div>
+  <div class="cart-main">
+    <button id="test-orders">Adding items to cart</button>
+    <ul id="orders"></ul>
+    <h3>Total:</h3>
+    <button id ="place-order">Place order</button>
+  </div>
+
+  </section>
 </body>
 
 </html>
