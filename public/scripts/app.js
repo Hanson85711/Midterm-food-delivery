@@ -4,14 +4,10 @@
 $(document).ready(function() {
   const $ordersList = $('#orders');
   const loadCart = function() {
-      $.ajax({
-        method: 'GET',
-        url: '/api/orders'
-      })
-      .done((response) => {
+    return $.get('/api/orders')
+      .then((response) => {
         $ordersList.empty();
-
-        for(const order of response.orders) {
+        for (const order of response.orders) {
           console.log(order);
           $(`<li class="order">`).text(order.food + " " + "Quantity: x" + order.count + " Price: " + order.total_price).appendTo($ordersList);
         }
@@ -19,19 +15,18 @@ $(document).ready(function() {
   };
 
   const getFinalPrice = function() {
-    $.ajax({
-      method: 'GET',
-      url: '/api/orders/final'
-    })
-    .done((response) => {
-      for(const order of response.final) {
-        console.log(order);
-        $(`<li class="order">`).text("Final Price: " + order.final_price).appendTo($ordersList);
-      }
-    });
-  }
+    return $.get('/api/orders/final')
+      .then((response) => {
+        for (const order of response.final) {
+          console.log(order);
+          $(`<li class="order">`).text("Final Price: " + order.final_price).appendTo($ordersList);
+        }
+      });
+  };
 
-  loadCart();
-  getFinalPrice();
+  loadCart()
+    .then(() => {
+      getFinalPrice();
+    });
 });
 
