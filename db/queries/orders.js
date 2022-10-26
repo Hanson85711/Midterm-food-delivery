@@ -5,7 +5,7 @@ const getOrders = (userid) => {
   foods.pic as pic
   FROM orders
   JOIN foods ON foods.id = food_id
-  WHERE orders.user_id = ${userid}
+  WHERE orders.user_id = ${userid} AND submitted = FALSE
   GROUP BY foods.name, orders.user_id, foods.pic, foods.id;`)
     .then(data => {
       return data.rows;
