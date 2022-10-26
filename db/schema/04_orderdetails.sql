@@ -1,6 +1,6 @@
 -- Drop and recreate Order Details table (Example)
 
-DROP TABLE IF EXISTS orders CASCADE;
+DROP TABLE IF EXISTS order_details CASCADE;
 
 CREATE TABLE order_details (
   id SERIAL PRIMARY KEY NOT NULL,
