@@ -67,7 +67,7 @@ app.get('/', async (req, res) => {
 app.get('/login/:userId', (req, res) => {
   console.log(req.params.userId);
   res.cookie('user_id', req.params.userId);
-  res.redirect('/testfoods');
+  res.redirect('/');
 })
 
 app.listen(PORT, () => {

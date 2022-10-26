@@ -1,12 +1,12 @@
 const db = require('../connection');
 
 const getOrders = (userid) => {
-  return db.query(`SELECT foods.name as food, orders.user_id, count(orders.*), SUM(foods.price) as total_price,
+  return db.query(`SELECT foods.name as food, orders.user_id, count(orders.*), SUM(foods.price) as total_price, foods.id as foodId,
   foods.pic as pic
   FROM orders
   JOIN foods ON foods.id = food_id
   WHERE orders.user_id = ${userid}
-  GROUP BY foods.name, orders.user_id, foods.pic;`)
+  GROUP BY foods.name, orders.user_id, foods.pic, foods.id;`)
     .then(data => {
       return data.rows;
     });
