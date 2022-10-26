@@ -15,7 +15,7 @@ const getSubmittedOrders = (userid) => {
   foods.pic as pic
   FROM orders
   JOIN foods ON foods.id = food_id
-  WHERE orders.user_id = ${userid} AND submitted = TRUE
+  WHERE submitted = TRUE
   GROUP BY foods.name, orders.user_id, foods.pic, foods.id;`)
     .then(data => {
       return data.rows;
