@@ -64,23 +64,17 @@ $(document).ready(function() {
 
   //On Click Function which adds item to database
   const buttonClickSend = function() {
-    let params = [];
-    console.log("1234", buttons);
     for (let index = 0; index < buttons.length; index++) {
       console.log("Reading through array");
       buttons[index].onclick = function () {
         console.log("clicked");
-        params = [];
-        params.push(buttons[index].id);
-        params.push(userId);
         $.ajax({
           method: 'GET',
           url: '/api/foods/add',
           data: {foodId: buttons[index].id, userId: getCookie("user_id")}
         })
           .then(function(response) {
-            console.log(response);
-            renderFoods(response);
+            console.log("this is working");
           })
           .catch((err) => {
             console.log(err);
@@ -88,5 +82,4 @@ $(document).ready(function() {
       }
     }
   }
-
 });
