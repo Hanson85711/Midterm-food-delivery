@@ -60,4 +60,22 @@ router.get('/minus', (req, res) => {
         });
 })
 
+router.get('/trash', (req, res) => {
+  let foodId = req.query.foodId;
+  let userId = req.query.userId;
+
+  return pool
+        .query(`DELETE FROM orders
+          WHERE user_id = $2
+          AND food_id = $1
+          RETURNING *;`, [foodId, userId])
+        .then((result) => {
+          const output = result.rows[0];
+          res.json({ output });
+        })
+        .catch((err) => {
+          console.log("this is error", err);
+        });
+})
+
 module.exports = router;

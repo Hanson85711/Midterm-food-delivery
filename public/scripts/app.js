@@ -7,6 +7,7 @@ $(document).ready(function () {
   const $ordersList = $('#orders');
   let buttonsAdd = [];
   let buttonsMinus = [];
+  let buttonsDelete = [];
 
 
   const loadCart = function() {
@@ -22,7 +23,7 @@ $(document).ready(function () {
           <div class="cart-item-count-icon"></div>
           <div class="cart-item-count"><button class="count-minus" id=${order.foodid}> <i class="fa-solid fa-circle-minus"></i></button>${order.count}<button class="count-add" id=${order.foodid}><i class="fa-solid fa-circle-plus"></button></i></div>
           <div class="category-item-price">$${order.total_price}</div>
-          <div><button id="delete-button"> <i class="fa-solid fa-trash"></i></button></div>
+          <div><button class="delete-button" id=${order.foodid}> <i class="fa-solid fa-trash"></i></button></div>
         </li>
         `);
           $cartItems.appendTo($ordersList);
@@ -31,10 +32,12 @@ $(document).ready(function () {
         setTimeout(() => {
           buttonsAdd = document.querySelectorAll('.count-add');
           buttonsMinus = document.querySelectorAll('.count-minus');
+          buttonsDelete = document.querySelectorAll('.delete-button');
           console.log("the add buttons", buttonsAdd);
           console.log("the minus buttons", buttonsMinus);
           buttonClickAddSend();
           buttonClickMinusSend();
+          buttonsDeleteItem();
         }, 500);
       });
   };
@@ -45,6 +48,30 @@ $(document).ready(function () {
     if (parts.length === 2) return parts.pop().split(';').shift();
   }
 
+
+  const buttonsDeleteItem = function() {
+    for (let index = 0; index < buttonsDelete.length; index++) {
+      console.log("Reading through array");
+      buttonsDelete[index].onclick = function () {
+        console.log("clicked");
+        $.ajax({
+          method: 'GET',
+          url: '/api/foods/trash',
+          data: {foodId: buttonsDelete[index].id, userId: getCookie("user_id")}
+        })
+          .then(function(response) {
+            console.log(response);
+            loadCart()
+            .then(() => {
+              getFinalPrice();
+            });
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      }
+    }
+  }
     //On Click Function which adds item to database
     const buttonClickAddSend = function() {
       for (let index = 0; index < buttonsAdd.length; index++) {
@@ -102,6 +129,9 @@ $(document).ready(function () {
       .then((response) => {
         for (const order of response.final) {
           console.log(order);
+          if (order.final_price === null) {
+            $(`<li class="order">`).text("Nothing in cart!").appendTo($ordersList);
+          } else 
           $(`<li class="order">`).text("Final Price: " + order.final_price).appendTo($ordersList);
         }
       });
