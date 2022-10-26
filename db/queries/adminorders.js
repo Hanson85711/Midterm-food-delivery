@@ -10,7 +10,7 @@ const placeOrder = (userid) => {
     });
 };
 
-const getSubmittedOrders = (userid) => {
+const getSubmittedOrders = () => {
   return db.query(`SELECT foods.name as food, orders.user_id, count(orders.*), SUM(foods.price) as total_price, foods.id as foodId,
   foods.pic as pic
   FROM orders
