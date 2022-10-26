@@ -16,7 +16,6 @@ $(document).ready(function () {
         $ordersList.empty();
         for (const order of response.orders) {
           console.log(order);
-
           const $cartItems = $(`
           <li class="cart-item">
          <img class="cart-item-image" src=${order.pic}/>
@@ -132,7 +131,7 @@ $(document).ready(function () {
           console.log(order);
           if (order.final_price === null) {
             $(`<li class="order">`).text("Nothing in cart!").appendTo($ordersList);
-          } else 
+          } else
           $(`<li class="order">`).text("Final Price: " + order.final_price).appendTo($ordersList);
         }
       });

@@ -14,13 +14,13 @@
   <link rel="stylesheet" href="/styles/layout.css" />
 
   <script src="/vendor/jquery-3.0.0.js"></script>
-  <script defer src="/scripts/admin.js"></script>
+  <script defer src="/scripts/admin-renderer.js"></script>
 </head>
 
 <body>
   <%- include('./partials/_header') %>
-  <h1>Admin</h1>
-  <div>submitted orders go here</div>
+  <h1 class="admin-header">Admin</h1>
+  <ul id="admin-main"></ul>
 </body>
 
 </html>
