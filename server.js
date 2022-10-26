@@ -37,7 +37,8 @@ const foodApiRoutes = require('./routes/food-api');
 const usersRoutes = require('./routes/users');
 const foodmenuRoutes = require('./routes/foodmenu');
 const { getFoods } = require('./db/queries/foods');
-
+const adminRoutes = require('./routes/admin');
+const adminApiRoutes = require('./routes/admin-api');
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
 // Note: Endpoints that return data (eg. JSON) usually start with `/api`
@@ -47,6 +48,8 @@ app.use('/users', usersRoutes);
 app.use('/testfoods', foodmenuRoutes);
 app.use('/api/orders', orderApiRoutes);
 app.use('/api/foods', foodApiRoutes);
+app.use('/admin', adminRoutes);
+app.use('/api/admin', adminApiRoutes);
 
 // Note: mount other resources here, using the same pattern above
 

@@ -16,14 +16,12 @@ $font-extra-small:16px;
   display: inline-flex;
   align-items: center;
 }
-
 body {
   font-family: monospace;
   a {
     text-decoration: none;
   }
 }
-
 header {
   nav {
     display: flex;
@@ -99,6 +97,7 @@ main {
       margin: 2em;
       padding: 3em;
       border-radius: 10px;
+      box-shadow: 0 4px 15px 0 #9a9a9a;
     }
 
     .category-item-name {
@@ -106,10 +105,7 @@ main {
       font-size: 24px;
       margin: 1em 0;
     }
-    .category-item:hover{
-      /* offset-x | offset-y | blur-radius | spread-radius | color */
-      box-shadow: 0 4px 15px 0 $base-color6;
-    }
+
 
     .category-item-descriptions {
       margin: 1em 0;
@@ -208,4 +204,7 @@ main {
     background: none;
     border: none;
   }
+}
+.admin-header{
+  text-align: center;
 }

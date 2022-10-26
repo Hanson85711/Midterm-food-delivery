@@ -131,7 +131,7 @@ $(document).ready(function () {
           console.log(order);
           if (order.final_price === null) {
             $(`<li class="order">`).text("Nothing in cart!").appendTo($ordersList);
-          } else 
+          } else
           $(`<li class="order">`).text("Final Price: " + order.final_price).appendTo($ordersList);
         }
       });
