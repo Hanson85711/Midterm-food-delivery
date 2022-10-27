@@ -17,7 +17,7 @@ const getFinalTotal = (userid) => {
   FROM (SELECT SUM(foods.price) as total_price
   FROM orders
   JOIN foods ON foods.id = food_id
-  WHERE orders.user_id = 2
+  WHERE orders.user_id = 2 AND submitted = FALSE
   GROUP BY foods.name, orders.user_id) foo;`)
     .then(data => {
       return data.rows;

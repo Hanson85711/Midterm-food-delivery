@@ -1,6 +1,7 @@
 const express = require('express');
 const router  = express.Router();
 const foodQueries = require('../db/queries/foods');
+const adminQueries = require('../db/queries/adminorders');
 
 const { Pool } = require('pg');
 const pool = new Pool({
@@ -65,10 +66,9 @@ router.get('/trash', (req, res) => {
   let userId = req.query.userId;
 
   return pool
-        .query(`DELETE FROM orders
-          WHERE user_id = $2
-          AND food_id = $1
-          RETURNING *;`, [foodId, userId])
+        .query(`UPDATE orders
+        SET submitted = TRUE
+        ;`, [foodId, userId])
         .then((result) => {
           const output = result.rows[0];
           res.json({ output });
@@ -76,6 +76,20 @@ router.get('/trash', (req, res) => {
         .catch((err) => {
           console.log("this is error", err);
         });
+})
+
+router.get('/update', (req, res) => {
+  let userId = req.query.userId;
+
+  return adminQueries.placeOrder(userId)
+  .then(foods => {
+    res.json({ foods });
+  })
+  .catch(err => {
+    res
+      .status(500)
+      .json({ error: err.message });
+  });
 })
 
 module.exports = router;

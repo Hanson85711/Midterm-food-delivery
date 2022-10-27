@@ -5,6 +5,7 @@ $(document).ready(function () {
   let buttonsAdd = [];
   let buttonsMinus = [];
   let buttonsDelete = [];
+  let buttonSubmit = [];
 
 
   const loadCart = function() {
@@ -30,11 +31,13 @@ $(document).ready(function () {
           buttonsAdd = document.querySelectorAll('.count-add');
           buttonsMinus = document.querySelectorAll('.count-minus');
           buttonsDelete = document.querySelectorAll('.delete-button');
+          buttonSubmit = document.querySelectorAll('.order-button');
           console.log("the add buttons", buttonsAdd);
           console.log("the minus buttons", buttonsMinus);
           buttonClickAddSend();
           buttonClickMinusSend();
           buttonsDeleteItem();
+          submitItemsInCart();
         }, 500);
       });
   };
@@ -46,6 +49,28 @@ $(document).ready(function () {
   }
 
 
+  const submitItemsInCart = function() {
+    for (let index = 0; index < buttonSubmit.length; index++) {
+      buttonSubmit[index].onclick = function () {
+        $.ajax({
+          method: 'GET',
+          url: '/api/foods/update',
+          data: {foodId: buttonSubmit[index].id, userId: getCookie("user_id")}
+        })
+          .then(function(response) {
+            console.log(response);
+            loadCart()
+            .then(() => {
+              getFinalPrice();
+            });
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      }
+    }
+  }
+  
   const buttonsDeleteItem = function() {
     for (let index = 0; index < buttonsDelete.length; index++) {
       console.log("Reading through array");
