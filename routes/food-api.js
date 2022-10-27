@@ -7,8 +7,9 @@ const adminQueries = require('../db/queries/adminorders');
 
 const accountSid = process.env.TWILIO_ACCOUNT_SID;
 const authToken = process.env.TWILIO_AUTH_TOKEN;
-const client = require('twilio')(accountSid, authToken);
 const twilioNum = process.env.TWILIO_NUMBER;
+const testNum = process.env.TEST_NUMBER;
+const client = require('twilio')(accountSid, authToken);
 
 const { Pool } = require('pg');
 const pool = new Pool({
@@ -87,16 +88,21 @@ router.get('/trash', (req, res) => {
 
 router.get('/update', (req, res) => {
   let userId = req.query.userId;
-
   return adminQueries.placeOrder(userId)
     .then(foods => {
-      // Twilio function to send SMS to Admin
-       client.messages
-        .create({ body: `You have received an order from customer ${foods[0].name}. Order Number ${foods[0].order_number}.   Please confirm on admin page. `,
-        from: twilioNum,
-        to: '+16049703902' })
-        .then(message => console.log(message.sid));
-      res.json({ foods });
+      console.log('foods: ', foods)
+      userQueries.getAdminPhone()
+        .then(admin => {
+          const adminNum = admin.rows[0].phone
+          client.messages
+            .create({
+              body: `You have received an order from customer ${foods[0].name}. Order Number ${foods[0].order_number}.   Please confirm on admin page. `,
+              from: twilioNum,
+              to: adminNum
+            })
+            .then(message => console.log(message.sid));
+          res.json({ foods });
+        })
     })
     .catch(err => {
       res
@@ -104,6 +110,15 @@ router.get('/update', (req, res) => {
         .json({ error: err.message });
     });
 });
+
+// Twilio function to send SMS to Admin
+// client.messages
+//   .create({
+//     body: `You have received an order from customer ${foods[0].name}. Order Number ${foods[0].order_number}.   Please confirm on admin page. `,
+//     from: twilioNum,
+//     to: testNum
+//   })
+//   .then(message => console.log(message.sid));
 
 module.exports = router;
 

@@ -8,5 +8,9 @@ const getUsers = () => {
     });
 };
 
+const getAdminPhone = () => {
+  return db.query(`SELECT phone FROM users
+  WHERE type = 'admin';`)
+}
 
-module.exports = { getUsers };
+module.exports = { getUsers, getAdminPhone };
