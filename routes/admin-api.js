@@ -1,6 +1,6 @@
 const express = require('express');
 const router  = express.Router();
-const orderQueries = require('../db/queries/orders');
+const adminQueries = require('../db/queries/adminorders');
 const cookieParser = require("cookie-parser");
 
 const app = express();
@@ -9,8 +9,9 @@ app.use(cookieParser());
 router.get('/', (req, res) => {
   const userId = req.cookies; //Have to obtain user ID param with this
   console.log(userId['user_id']);
-  orderQueries.getOrders(userId['user_id'])
+  adminQueries.getSubmittedOrdersByUser()
     .then(orders => {
+      console.log(orders);
       res.json({ orders });
     })
     .catch(err => {
