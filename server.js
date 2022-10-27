@@ -5,6 +5,9 @@ require('dotenv').config();
 const sassMiddleware = require('./lib/sass-middleware');
 const express = require('express');
 const morgan = require('morgan');
+const accountSid = 'ACd6da4865cd3368c87c4eaf53507a5ff6';
+const authToken = 'da65cf017d407e4d64a85982da9ecefd';
+const client = require('twilio')(accountSid, authToken);
 
 const PORT = process.env.PORT || 8080;
 const app = express();
