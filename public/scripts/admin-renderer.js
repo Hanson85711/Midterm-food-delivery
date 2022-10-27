@@ -34,6 +34,7 @@ $(document).ready(function() {
     const $orderListing = $(`
     <li class="admin-item">
     <div class="admin-item-name"> ${"Order number: " + orderNumber + "    From: User " + orderUser}</div>
+    <button id= "admin-button">See Order Details</button>
   </li>
   `);
     return $orderListing;

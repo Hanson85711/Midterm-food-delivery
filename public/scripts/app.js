@@ -70,7 +70,7 @@ $(document).ready(function () {
       }
     }
   }
-  
+
   const buttonsDeleteItem = function() {
     for (let index = 0; index < buttonsDelete.length; index++) {
       console.log("Reading through array");
