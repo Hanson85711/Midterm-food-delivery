@@ -10,6 +10,7 @@ $(document).ready(function() {
     })
       .then(function(response) {
         // console.log("orders from db",response);
+        console.log(response);
         renderOrders(response);
       })
       .catch((err) => {
@@ -23,8 +24,8 @@ $(document).ready(function() {
   const creatOrderListing = function(orderObj) {
     //Takes in a order object and formats it into html format
 
-    const orderName = orderObj.food;
-    const orderPrice = orderObj.total_price;
+    const orderNumber = orderObj.order_number;
+    const orderUser = orderObj.user_id;
    // const orderID = orderObj.id;
 
     userId = orderObj.user_id;
@@ -32,8 +33,7 @@ $(document).ready(function() {
 
     const $orderListing = $(`
     <li class="admin-item">
-    <div class="admin-item-name"> ${orderName}</div>
-    <div class="admin-item-price">$${orderPrice}</div>
+    <div class="admin-item-name"> ${"Order number: " + orderNumber + "    From: User " + orderUser}</div>
   </li>
   `);
     return $orderListing;
@@ -49,6 +49,4 @@ $(document).ready(function() {
       $adminOrderContainer.append($order); //Appends return value to food container
     }
   };
-
-
 });
