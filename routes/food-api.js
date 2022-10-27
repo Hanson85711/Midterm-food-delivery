@@ -2,7 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const router = express.Router();
 const foodQueries = require('../db/queries/foods');
-const userQueries = require('../db/queries/users');
+const adminPhone = require('../db/queries/users');
 const adminQueries = require('../db/queries/adminorders');
 
 const accountSid = process.env.TWILIO_ACCOUNT_SID;
@@ -10,6 +10,7 @@ const authToken = process.env.TWILIO_AUTH_TOKEN;
 const client = require('twilio')(accountSid, authToken);
 
 const { Pool } = require('pg');
+const { get } = require('./users-api');
 const pool = new Pool({
   user: 'vagrant',
   password: '123',
@@ -89,13 +90,20 @@ router.get('/update', (req, res) => {
 
   return adminQueries.placeOrder(userId)
     .then(foods => {
+      console.log("foods",foods)
+      adminPhone.getAdminPhone()
+      .then(phone => {
+        console.log("phone",phone)
+        res.json({ foods });
+      })
       // Twilio function to send SMS to Admin
-       client.messages
-        .create({ body: `You have received an order from customer ${foods[0].name}. Order Number ${foods[0].order_number}.   Please confirm on admin page. `,
-        from: '+13464856834',
-        to: '+16043630479' })
-        .then(message => console.log(message.sid));
-      res.json({ foods });
+
+      //  client.messages
+      //   .create({ body: `You have received an order from customer ${foods[0].name}. Order Number ${foods[0].order_number}.   Please confirm on admin page. `,
+      //   from: '+13464856834',
+      //   to: '+16043630479' })
+      //   .then(message => console.log(message.sid));
+
     })
     .catch(err => {
       res
