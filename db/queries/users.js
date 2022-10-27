@@ -13,5 +13,4 @@ const getAdminPhone = () => {
   WHERE type = 'admin';`)
 }
 
-
 module.exports = { getUsers, getAdminPhone };

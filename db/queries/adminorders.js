@@ -28,6 +28,13 @@ const placeOrder = (userid) => {
     });
 };
 
+const completeOrder = (userid) => {
+  return db.query(`UPDATE orders
+  SET completed = true
+  
+  `)
+}
+
 
 const getSubmittedOrders = () => {
   return db.query(`SELECT foods.name as food, orders.user_id, count(orders.*), SUM(foods.price) as total_price, foods.id as foodId,
