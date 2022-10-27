@@ -1,6 +1,7 @@
 // Client facing scripts here
 //Test Button Click for getting from order database
-$(document).ready(function () {
+
+$(document).ready(function() {
   const $ordersList = $('#orders');
   let buttonsAdd = [];
   let buttonsMinus = [];
@@ -51,100 +52,100 @@ $(document).ready(function () {
 
   const submitItemsInCart = function() {
     for (let index = 0; index < buttonSubmit.length; index++) {
-      buttonSubmit[index].onclick = function () {
+      buttonSubmit[index].onclick = function() {
         $.ajax({
           method: 'GET',
           url: '/api/foods/update',
-          data: {foodId: buttonSubmit[index].id, userId: getCookie("user_id")}
+          data: { foodId: buttonSubmit[index].id, userId: getCookie("user_id") }
         })
           .then(function(response) {
             console.log(response);
             loadCart()
-            .then(() => {
-              getFinalPrice();
-            });
+              .then(() => {
+                getFinalPrice();
+              });
           })
           .catch((err) => {
             console.log(err);
           });
-      }
+      };
     }
-  }
-  
+  };
+
   const buttonsDeleteItem = function() {
     for (let index = 0; index < buttonsDelete.length; index++) {
       console.log("Reading through array");
-      buttonsDelete[index].onclick = function () {
+      buttonsDelete[index].onclick = function() {
         console.log("clicked");
         $.ajax({
           method: 'GET',
           url: '/api/foods/trash',
-          data: {foodId: buttonsDelete[index].id, userId: getCookie("user_id")}
+          data: { foodId: buttonsDelete[index].id, userId: getCookie("user_id") }
         })
           .then(function(response) {
             console.log(response);
             loadCart()
-            .then(() => {
-              getFinalPrice();
-            });
+              .then(() => {
+                getFinalPrice();
+              });
           })
           .catch((err) => {
             console.log(err);
           });
-      }
+      };
     }
-  }
-    //On Click Function which adds item to database
-    const buttonClickAddSend = function() {
-      for (let index = 0; index < buttonsAdd.length; index++) {
-        console.log("Reading through array");
-        buttonsAdd[index].onclick = function () {
-          console.log("clicked");
-          $.ajax({
-            method: 'GET',
-            url: '/api/foods/add',
-            data: {foodId: buttonsAdd[index].id, userId: getCookie("user_id")}
-          })
-            .then(function(response) {
-              console.log(response);
-              loadCart()
+  };
+  //On Click Function which adds item to database
+  const buttonClickAddSend = function() {
+    for (let index = 0; index < buttonsAdd.length; index++) {
+      console.log("Reading through array");
+      buttonsAdd[index].onclick = function() {
+        console.log("clicked");
+        $.ajax({
+          method: 'GET',
+          url: '/api/foods/add',
+          data: { foodId: buttonsAdd[index].id, userId: getCookie("user_id") }
+        })
+          .then(function(response) {
+            console.log(response);
+            loadCart()
               .then(() => {
                 console.log("It's not working");
                 getFinalPrice();
               });
-            })
-            .catch((err) => {
-              console.log(err);
-            });
-        }
-      }
-    }
-
-      //On Click Function which adds item to database
-  const buttonClickMinusSend = function() {
-    for (let index = 0; index < buttonsMinus.length; index++) {
-      console.log("Reading through array");
-      buttonsMinus[index].onclick = function () {
-        console.log("clicked");
-        $.ajax({
-          method: 'GET',
-          url: '/api/foods/minus',
-          data: {foodId: buttonsMinus[index].id, userId: getCookie("user_id")}
-        })
-          .then(function(response) {
-            console.log(response);
-            loadCart()
-            .then(() => {
-              console.log("It's not working");
-              getFinalPrice();
-            });
           })
           .catch((err) => {
             console.log(err);
           });
-      }
+      };
     }
-  }
+  };
+
+  //On Click Function which adds item to database
+  const buttonClickMinusSend = function() {
+    for (let index = 0; index < buttonsMinus.length; index++) {
+      console.log("Reading through array");
+      buttonsMinus[index].onclick = function() {
+        console.log("clicked");
+        $.ajax({
+          method: 'GET',
+          url: '/api/foods/minus',
+          data: { foodId: buttonsMinus[index].id, userId: getCookie("user_id") }
+        })
+          .then(function(response) {
+            console.log(response);
+            loadCart()
+              .then(() => {
+                console.log("It's not working");
+                getFinalPrice();
+              });
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      };
+    }
+  };
 
   const getFinalPrice = function() {
     return $.get('/api/orders/final')
@@ -154,7 +155,7 @@ $(document).ready(function () {
           if (order.final_price === null) {
             $(`<li class="order">`).text("Nothing in cart!").appendTo($ordersList);
           } else
-          $(`<li class="order">`).text("Final Price: " + order.final_price).appendTo($ordersList);
+            $(`<li class="order">`).text("Final Price: " + order.final_price).appendTo($ordersList);
         }
       });
   };

@@ -7,4 +7,15 @@ const getFoods = () => {
     });
 };
 
+const getUsername = () => {
+  return db.query(`SELECT users.name FROM foods
+  JOIN users ON user_id = users.id
+  ;`)
+    .then(data => {
+      return data.rows;
+    });
+};
+
+
+
 module.exports = { getFoods };
