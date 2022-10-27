@@ -1,10 +1,12 @@
+require('dotenv').config()
+
 const express = require('express');
 const router = express.Router();
 const foodQueries = require('../db/queries/foods');
 const adminQueries = require('../db/queries/adminorders');
 
-const accountSid = 'ACd6da4865cd3368c87c4eaf53507a5ff6';
-const authToken = 'da65cf017d407e4d64a85982da9ecefd';
+const accountSid = process.env.TWILIO_ACCOUNT_SID;
+const authToken = process.env.TWILIO_AUTH_TOKEN;
 const client = require('twilio')(accountSid, authToken);
 
 const { Pool } = require('pg');
@@ -84,12 +86,12 @@ router.get('/trash', (req, res) => {
 
 router.get('/update', (req, res) => {
   let userId = req.query.userId;
-  console.log(userId);
   return adminQueries.placeOrder(userId)
     .then(foods => {
       client.messages
-        .create({ body: 'You have received an order from user. Please confirm on admin page.', from: '+18584375414', to: '+16049703902' })
-        .then(message => console.log(message.sid));
+        .create({ body: `You have received an order from user ${userId}. Please confirm on admin page.`, from: '+18584375414', to: '+16049703902' })
+        .then(message => console.log(message.sid))
+        .catch(e => console.log(e))
       res.json({ foods });
     })
     .catch(err => {
@@ -100,3 +102,5 @@ router.get('/update', (req, res) => {
 });
 
 module.exports = router;
+
+
