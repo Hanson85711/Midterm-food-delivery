@@ -5,6 +5,8 @@ require('dotenv').config();
 const sassMiddleware = require('./lib/sass-middleware');
 const express = require('express');
 const morgan = require('morgan');
+const {  getUserDetails } = require('./helpers');
+
 
 const PORT = process.env.PORT || 8080;
 const app = express();
@@ -36,7 +38,7 @@ const widgetApiRoutes = require('./routes/widgets-api');
 const foodApiRoutes = require('./routes/food-api');
 const usersRoutes = require('./routes/users');
 const foodmenuRoutes = require('./routes/foodmenu');
-const { getFoods } = require('./db/queries/foods');
+const { getUsers } = require('./db/queries/users');
 const adminRoutes = require('./routes/admin');
 const adminApiRoutes = require('./routes/admin-api');
 // Mount all resource routes
@@ -56,16 +58,28 @@ app.use('/api/admin', adminApiRoutes);
 // Home page
 // Warning: avoid creating more routes in this file!
 // Separate them into separate routes files (see above).
+// function getCookie(name) {
+//   const value =
+//   const parts = value.split(`; ${name}=`);
+//   if (parts.length === 2) return parts.pop().split(';').shift();
+
+// }
 
 app.get('/', async (req, res) => {
-  // const myFoods = await getFoods();
-  // //console.log('My Foods: ', myFoods);
-  // const templateVars = {
-  //   myFoods
-  // }
-  // res.render('index', templateVars);
-  res.render('index');
+  const users = await getUsers(); // users objects
+  const userId = req.cookies.user_id; // id from cookie
+  const type = getUserDetails(users, userId)
+  console.log("type",type)
+  const templateVars = {
+    type
+  }
+  if(type === 'admin'){
+    res.render('admin',templateVars)
+  }
+  res.render('index', templateVars);
 });
+
+
 
 app.get('/login/:userId', (req, res) => {
   console.log(req.params.userId);
@@ -77,8 +91,8 @@ app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
 });
 
-process.on('SIGINT', function() {
-  console.log( "\nGracefully shutting down from SIGINT (Ctrl-C)" );
+process.on('SIGINT', function () {
+  console.log("\nGracefully shutting down from SIGINT (Ctrl-C)");
   // some other closing procedures go here
   process.exit(0);
 });

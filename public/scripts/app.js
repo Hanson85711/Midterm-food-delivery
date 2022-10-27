@@ -59,7 +59,7 @@ $(document).ready(function() {
           data: { foodId: buttonSubmit[index].id, userId: getCookie("user_id") }
         })
           .then(function(response) {
-            console.log(response);
+            console.log("response from db",response);
             loadCart()
               .then(() => {
                 getFinalPrice();
@@ -68,9 +68,9 @@ $(document).ready(function() {
           .catch((err) => {
             console.log(err);
           });
-      };
+      }
     }
-  };
+  }
 
   const buttonsDeleteItem = function() {
     for (let index = 0; index < buttonsDelete.length; index++) {

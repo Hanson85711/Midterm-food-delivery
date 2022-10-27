@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router()
-
+const { getUsers } = require('../db/queries/users');
+const {  getUserDetails } = require('../helpers');
 //POST request to delete foods from order
 router.post("/foods/:id/delete", (req, res) => {
 })
@@ -17,9 +18,23 @@ router.get('/foods/:id', (req, res) => {
   res.render("foods");
 });
 
+
 //TestPage
-router.get('/', (req, res) => {
-  res.render('testfoods');
+router.get('/', async (req, res) => {
+  // const myFoods = await getFoods();
+  // //console.log('My Foods: ', myFoods);
+  // const templateVars = {
+  //   myFoods
+  // }
+  // res.render('index', templateVars);
+  const users = await getUsers(); // users objects
+  const userId = req.cookies.user_id; // id from cookie
+  const type = getUserDetails(users, userId)
+  console.log("type",type)
+  const templateVars = {
+    type
+  }
+  res.render('testfoods', templateVars);
 });
 
 router.get('/fix', (req, res) => {

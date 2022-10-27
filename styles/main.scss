@@ -208,3 +208,30 @@ main {
 .admin-header{
   text-align: center;
 }
+#admin-main{
+  display: flex;
+flex-direction: column;
+margin: auto;
+align-items: center;
+
+.admin-item {
+  list-style: none;
+  border: 1px #c5c0c0  solid;
+  margin: 2em;
+  padding: 2em;
+  border-radius: 2em;
+  width: 80%;
+  display: inline-flex;
+  justify-content: space-between;
+  font-size: $font-description;
+  align-items: center;
+}
+#admin-button {
+  font-size: 20px;
+  border: navajowhite;
+  padding: 1em 2em;
+  border-radius: 2em;
+  background: $base-color4;
+  color:$font-white
+}
+}
