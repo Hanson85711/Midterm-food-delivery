@@ -16,17 +16,17 @@ const placeOrder = (userid) => {
     });
 };
 
-const getSubmittedOrders = () => {
-  return db.query(`SELECT foods.name as food, orders.user_id, count(orders.*), SUM(foods.price) as total_price, foods.id as foodId,
-  foods.pic as pic, order_number
-  FROM orders
-  JOIN foods ON foods.id = food_id
-  WHERE submitted = TRUE
-  GROUP BY foods.name, orders.user_id, foods.pic, foods.id, order_number;`)
-    .then(data => {
-      return data.rows;
-    });
-};
+// const getSubmittedOrders = () => {
+//   return db.query(`SELECT foods.name as food, orders.user_id, count(orders.*), SUM(foods.price) as total_price, foods.id as foodId,
+//   foods.pic as pic, order_number
+//   FROM orders
+//   JOIN foods ON foods.id = food_id
+//   WHERE submitted = TRUE
+//   GROUP BY foods.name, orders.user_id, foods.pic, foods.id, order_number;`)
+//     .then(data => {
+//       return data.rows;
+//     });
+// };
 
 const getSubmittedOrdersByUser = () => {
   return db.query(`SELECT orders.order_number, orders.user_id, SUM(foods.price) as total_price
@@ -39,4 +39,4 @@ const getSubmittedOrdersByUser = () => {
     });
 };
 
-module.exports = { placeOrder, getSubmittedOrders, getSubmittedOrdersByUser };
+module.exports = { placeOrder, getSubmittedOrdersByUser };

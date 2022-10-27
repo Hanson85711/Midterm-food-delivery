@@ -7,6 +7,8 @@ const adminQueries = require('../db/queries/adminorders');
 
 const accountSid = process.env.TWILIO_ACCOUNT_SID;
 const authToken = process.env.TWILIO_AUTH_TOKEN;
+const twilioNumber = process.env.TWILIO_NUMBER;
+const testNumber = process.env.TEST_NUMBER;
 const client = require('twilio')(accountSid, authToken);
 
 const { Pool } = require('pg');
@@ -89,7 +91,7 @@ router.get('/update', (req, res) => {
   return adminQueries.placeOrder(userId)
     .then(foods => {
       client.messages
-        .create({ body: `You have received an order from user ${userId}. Please confirm on admin page.`, from: '+18584375414', to: '+16049703902' })
+        .create({ body: `You have received a new order from name, user. Please confirm on admin page.`, from: twilioNumber, to: testNumber })
         .then(message => console.log(message.sid))
         .catch(e => console.log(e))
       res.json({ foods });
