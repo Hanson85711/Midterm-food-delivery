@@ -18,7 +18,13 @@ router.get('/foods/:id', (req, res) => {
 });
 
 //TestPage
-router.get('/', (req, res) => {
+router.get('/', async (req, res) => {
+  // const myFoods = await getFoods();
+  // //console.log('My Foods: ', myFoods);
+  // const templateVars = {
+  //   myFoods
+  // }
+  // res.render('index', templateVars);
   res.render('testfoods');
 });
 

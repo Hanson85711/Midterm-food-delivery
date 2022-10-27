@@ -1,13 +1,25 @@
 <header>
   <nav>
-    <div class = "header-logo">
+    <div class="header-logo">
       <img src="../images/starbucks.jpeg">
-    <span><a href = "/">Spooky bar</a></span>
-  </div>
-  <div class= "header-categories">
-    <a class="category-button" href="">Drinks<br></a>
-    <a class="category-button" href="">Snacks<br></a>
-    <button class="cart-button"><a href = "/testfoods">My Cart</a><br></button>
-  </div>
- </nav>
+      <span><a href="/">Spooky bar</a></span>
+    </div>
+    <% for( const user of users){ %>
+      <% if(user.type==='user' ) {%>
+        <div class="header-categories">
+          <a class="category-button" href="">Drinks<br></a>
+          <a class="category-button" href="">Snacks<br></a> logged in as: <%= user.name %>
+            <button class="cart-button"><a href="/testfoods">My Cart</a><br></button>
+          </div>
+
+            <% } else if (user.type==='admin' ) { %>
+              <div class="header-categories">
+               <a class="category-button" href="">Snacks<br></a> logged in as: <%= user.name %>
+
+                </div>
+                <% } %>
+
+
+        <% } %>
+  </nav>
 </header>

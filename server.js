@@ -36,7 +36,7 @@ const widgetApiRoutes = require('./routes/widgets-api');
 const foodApiRoutes = require('./routes/food-api');
 const usersRoutes = require('./routes/users');
 const foodmenuRoutes = require('./routes/foodmenu');
-const { getFoods } = require('./db/queries/foods');
+const { getUsers } = require('./db/queries/users');
 const adminRoutes = require('./routes/admin');
 const adminApiRoutes = require('./routes/admin-api');
 // Mount all resource routes
@@ -56,15 +56,30 @@ app.use('/api/admin', adminApiRoutes);
 // Home page
 // Warning: avoid creating more routes in this file!
 // Separate them into separate routes files (see above).
+// function getCookie(name) {
+//   const value =
+//   const parts = value.split(`; ${name}=`);
+//   if (parts.length === 2) return parts.pop().split(';').shift();
+
+// }
 
 app.get('/', async (req, res) => {
-  // const myFoods = await getFoods();
-  // //console.log('My Foods: ', myFoods);
-  // const templateVars = {
-  //   myFoods
-  // }
-  // res.render('index', templateVars);
-  res.render('index');
+  const users = await getUsers(); // users objects
+
+  const userId = req.cookies.user_id; // id from cookie
+
+
+   for(const user of users){
+    if(user.id === Number(userId))
+    {
+       console.log("type",user.type)
+    }
+   }
+  const templateVars = {
+    userId,
+    users
+  }
+  res.render('index', templateVars);
 });
 
 app.get('/login/:userId', (req, res) => {
@@ -77,8 +92,8 @@ app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
 });
 
-process.on('SIGINT', function() {
-  console.log( "\nGracefully shutting down from SIGINT (Ctrl-C)" );
+process.on('SIGINT', function () {
+  console.log("\nGracefully shutting down from SIGINT (Ctrl-C)");
   // some other closing procedures go here
   process.exit(0);
 });
