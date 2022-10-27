@@ -59,7 +59,7 @@ $(document).ready(function() {
           data: { foodId: buttonSubmit[index].id, userId: getCookie("user_id") }
         })
           .then(function(response) {
-            console.log(response);
+            console.log("response from db",response);
             loadCart()
               .then(() => {
                 getFinalPrice();
@@ -68,11 +68,6 @@ $(document).ready(function() {
           .catch((err) => {
             console.log(err);
           });
-          client.messages
-          .create({ body: 'You have received an order from user. Please confirm on admin page.',
-          from: '+18584375414',
-           to: '+6049703902' })
-          .then(message => console.log(message.sid));
       }
     }
   }

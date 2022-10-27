@@ -27,9 +27,9 @@ $(document).ready(function() {
     const orderNumber = orderObj.order_number;
     const orderUser = orderObj.user_id;
    // const orderID = orderObj.id;
-
+console.log("order",orderObj)
     userId = orderObj.user_id;
-    console.log("foodobje",orderObj)
+
 
     const $orderListing = $(`
     <li class="admin-item">

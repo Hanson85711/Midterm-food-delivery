@@ -5,9 +5,8 @@ require('dotenv').config();
 const sassMiddleware = require('./lib/sass-middleware');
 const express = require('express');
 const morgan = require('morgan');
-const accountSid = 'ACd6da4865cd3368c87c4eaf53507a5ff6';
-const authToken = 'da65cf017d407e4d64a85982da9ecefd';
-const client = require('twilio')(accountSid, authToken);
+const {  getUserDetails } = require('./helpers');
+
 
 const PORT = process.env.PORT || 8080;
 const app = express();
@@ -68,22 +67,19 @@ app.use('/api/admin', adminApiRoutes);
 
 app.get('/', async (req, res) => {
   const users = await getUsers(); // users objects
-
   const userId = req.cookies.user_id; // id from cookie
-
-
-   for(const user of users){
-    if(user.id === Number(userId))
-    {
-       console.log("type",user.type)
-    }
-   }
+  const type = getUserDetails(users, userId)
+  console.log("type",type)
   const templateVars = {
-    userId,
-    users
+    type
+  }
+  if(type === 'admin'){
+    res.render('admin',templateVars)
   }
   res.render('index', templateVars);
 });
+
+
 
 app.get('/login/:userId', (req, res) => {
   console.log(req.params.userId);

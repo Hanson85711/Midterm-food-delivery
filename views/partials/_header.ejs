@@ -4,24 +4,18 @@
       <img src="../images/starbucks.jpeg">
       <span><a href="/">Spooky bar</a></span>
     </div>
+    <% if(type === 'user' ) {%>
+      <div class="header-categories">
+        <h1>logged in as user</h1>
+        <a class="category-button" href="">Drinks<br></a>
+        <a class="category-button" href="">Snacks<br></a>
 
-
+        <button class="cart-button"><a href="/testfoods">My Cart</a><br></button>
+      </div>
+      <% } else if(type === 'admin' ) { %>
         <div class="header-categories">
-          <a class="category-button" href="">Drinks<br></a>
-          <a class="category-button" href="">Snacks<br></a> logged in as:
-
-            <button class="cart-button"><a href="/testfoods">My Cart</a><br></button>
-          </div>
-
-
-              <div class="header-categories">
-               <a class="category-button" href="">Snacks<br></a>
-
-
-                </div>
-
-
-
-
+          <h1>logged in as admin</h1>
+        </div>
+        <% } %>
   </nav>
 </header>
