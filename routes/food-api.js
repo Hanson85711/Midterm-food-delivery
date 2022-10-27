@@ -1,7 +1,11 @@
 const express = require('express');
-const router  = express.Router();
+const router = express.Router();
 const foodQueries = require('../db/queries/foods');
 const adminQueries = require('../db/queries/adminorders');
+
+const accountSid = 'ACd6da4865cd3368c87c4eaf53507a5ff6';
+const authToken = 'da65cf017d407e4d64a85982da9ecefd';
+const client = require('twilio')(accountSid, authToken);
 
 const { Pool } = require('pg');
 const pool = new Pool({
@@ -28,23 +32,23 @@ router.get('/add', (req, res) => {
   let userId = req.query.userId;
 
   return pool
-        .query(`INSERT INTO orders (food_id, user_id)
+    .query(`INSERT INTO orders (food_id, user_id)
         VALUES ($1, $2) RETURNING *;`, [foodId, userId])
-        .then((result) => {
-          const output = result.rows[0];
-          res.json({ output });
-        })
-        .catch((err) => {
-          console.log("this is error", err);
-        });
-})
+    .then((result) => {
+      const output = result.rows[0];
+      res.json({ output });
+    })
+    .catch((err) => {
+      console.log("this is error", err);
+    });
+});
 
 router.get('/minus', (req, res) => {
   let foodId = req.query.foodId;
   let userId = req.query.userId;
 
   return pool
-        .query(`DELETE FROM orders
+    .query(`DELETE FROM orders
           WHERE ctid IN (
           SELECT ctid
           FROM orders
@@ -52,44 +56,47 @@ router.get('/minus', (req, res) => {
           AND food_id = $1
           LIMIT 1)
           RETURNING *;`, [foodId, userId])
-        .then((result) => {
-          const output = result.rows[0];
-          res.json({ output });
-        })
-        .catch((err) => {
-          console.log("this is error", err);
-        });
-})
+    .then((result) => {
+      const output = result.rows[0];
+      res.json({ output });
+    })
+    .catch((err) => {
+      console.log("this is error", err);
+    });
+});
 
 router.get('/trash', (req, res) => {
   let foodId = req.query.foodId;
   let userId = req.query.userId;
 
   return pool
-        .query(`UPDATE orders
+    .query(`UPDATE orders
         SET submitted = TRUE
         ;`, [foodId, userId])
-        .then((result) => {
-          const output = result.rows[0];
-          res.json({ output });
-        })
-        .catch((err) => {
-          console.log("this is error", err);
-        });
-})
+    .then((result) => {
+      const output = result.rows[0];
+      res.json({ output });
+    })
+    .catch((err) => {
+      console.log("this is error", err);
+    });
+});
 
 router.get('/update', (req, res) => {
   let userId = req.query.userId;
-
+  console.log(userId);
   return adminQueries.placeOrder(userId)
-  .then(foods => {
-    res.json({ foods });
-  })
-  .catch(err => {
-    res
-      .status(500)
-      .json({ error: err.message });
-  });
-})
+    .then(foods => {
+      client.messages
+        .create({ body: 'You have received an order from user. Please confirm on admin page.', from: '+18584375414', to: '+16049703902' })
+        .then(message => console.log(message.sid));
+      res.json({ foods });
+    })
+    .catch(err => {
+      res
+        .status(500)
+        .json({ error: err.message });
+    });
+});
 
 module.exports = router;

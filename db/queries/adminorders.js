@@ -29,10 +29,11 @@ const getSubmittedOrders = () => {
 };
 
 const getSubmittedOrdersByUser = () => {
-  return db.query(`SELECT order_number, user_id
+  return db.query(`SELECT orders.order_number, orders.user_id, SUM(foods.price) as total_price
   FROM orders
+  JOIN foods ON foods.id = food_id
   WHERE submitted = TRUE
-  GROUP BY order_number, user_id;`)
+  GROUP BY orders.order_number, orders.user_id;`)
     .then(data => {
       return data.rows;
     });
