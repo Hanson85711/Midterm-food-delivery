@@ -90,10 +90,6 @@ router.get('/update', (req, res) => {
   let userId = req.query.userId;
   return adminQueries.placeOrder(userId)
     .then(foods => {
-      client.messages
-        .create({ body: `You have received a new order from name, user. Please confirm on admin page.`, from: twilioNumber, to: testNumber })
-        .then(message => console.log(message.sid))
-        .catch(e => console.log(e))
       res.json({ foods });
     })
     .catch(err => {
