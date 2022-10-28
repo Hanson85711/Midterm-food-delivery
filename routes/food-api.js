@@ -73,11 +73,13 @@ router.get('/minus', (req, res) => {
 router.get('/trash', (req, res) => {
   let foodId = req.query.foodId;
   let userId = req.query.userId;
-
+  console.log('foodId: ', foodId)
+  console.log('userId: ', userId)
   return pool
-    .query(`UPDATE orders
-        SET submitted = TRUE
-        ;`, [foodId, userId])
+    .query(`DELETE FROM orders
+    WHERE user_id = $2
+    AND food_id = $1
+    RETURNING *;`, [foodId, userId])
     .then((result) => {
       const output = result.rows[0];
       res.json({ output });
@@ -99,7 +101,7 @@ router.get('/update', (req, res) => {
             .create({
               body: `You have received an order from customer ${foods[0].name}. Order Number ${foods[0].order_number}.   Please confirm on admin page. `,
               from: twilioNum,
-              to: "+16043630479"
+              to: adminNum
             })
             .then(message => console.log(message.sid));
           res.json({ foods });

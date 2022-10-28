@@ -39,7 +39,6 @@ $(document).ready(function() {
     <div class="admin-item-name"> ${"Order number: " + orderNumber }</div>
 
     <button class= "admin-button" id=${orderNumber}>See Order Details</button>
-    <button class= "admin-delete-button" id="delete-button">Mark Completed</button>
   </li>
   `);
 
