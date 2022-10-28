@@ -1,11 +1,13 @@
 const express = require('express');
 const router  = express.Router();
+const { getUsers } = require('../db/queries/users');
+const {  getUserDetails } = require('../helpers');
 
-router.get('/', (req, res) => {
-  console.log('query: ', req.query)
-  console.log('orderID: ', req.query.orderNum)
-  console.log('userIdParams: ', req.query.orderUser)
-  res.render('orderDetails', {orderId: req.query.orderNum, userIdParams: req.query.orderUser})
+router.get('/', async (req, res) => {
+  const users = await getUsers(); // users objects
+  const userId = req.cookies.user_id; // id from cookie
+  const type = getUserDetails(users, userId)
+  res.render('orderDetails', {orderId: req.query.orderNum, userIdParams: req.query.orderUser, type } )
 });
 
 module.exports = router;

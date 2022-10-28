@@ -22,6 +22,7 @@ $(document).ready(function() {
 
   loadOrdersForAdmin();
 
+
   //Individual order Listing Creator
   const creatOrderListing = function(orderObj) {
     //Takes in a order object and formats it into html format
@@ -35,10 +36,13 @@ $(document).ready(function() {
 
     const $orderListing = $(`
     <li class="admin-item">
-    <div class="admin-item-name"> ${"Order number: " + orderNumber + "    From: User " + orderUser}</div>
+    <div class="admin-item-name"> ${"Order number: " + orderNumber }</div>
+
     <button class= "admin-button" id=${orderNumber}>See Order Details</button>
+    <button class= "admin-delete-button" id="delete-button">Mark Completed</button>
   </li>
   `);
+
     setTimeout(() => {
       buttonsDetails = document.querySelectorAll('.admin-button');
       viewOrderDetails();
@@ -46,8 +50,10 @@ $(document).ready(function() {
     return $orderListing;
   };
 
+
   const viewOrderDetails = function() {
     for (let index = 0; index < buttonsDetails.length; index++) {
+      console.log("button inside",index)
       buttonsDetails[index].onclick = function() {
         let orderNum = buttonsDetails[index].id;
         let userIdURLParam = orderUserIds[index];
@@ -60,7 +66,6 @@ $(document).ready(function() {
     }
   }
 
-
   const renderOrders = function(foods) {
     // console.log(foods.orders)
     //function that loops through orders and calls createFoodListing on each food
@@ -71,4 +76,9 @@ $(document).ready(function() {
       $adminOrderContainer.append($order); //Appends return value to food container
     }
   };
+
+
+
+
+
 });

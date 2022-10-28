@@ -51,7 +51,6 @@ app.use('/users', usersRoutes);
 app.use('/testfoods', foodmenuRoutes);
 app.use('/api/orders', orderApiRoutes);
 app.use('/api/foods', foodApiRoutes);
-// app.use('/admin', adminRoutes);
 app.use('/api/admin', adminApiRoutes);
 app.use('/order/detail', orderDetailRoutes)
 
