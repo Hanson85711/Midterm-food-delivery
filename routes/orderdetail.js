@@ -2,7 +2,9 @@ const express = require('express');
 const router  = express.Router();
 
 router.get('/', (req, res) => {
-  res.render('orderDetails')
+  
+  console.log('query: ', req.query)
+  res.render('orderDetails', {orderId: req.params.orderId, userIdParams: req.params.userIdParam})
 });
 
 module.exports = router;

@@ -21,5 +21,11 @@ router.get('/', (req, res) => {
     });
 });
 
+router.post('/', (req, res) => {
+
+  res.status(200)
+  res.redirect('/')
+})
+
 module.exports = router;
 
