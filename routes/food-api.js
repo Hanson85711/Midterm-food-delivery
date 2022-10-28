@@ -91,7 +91,6 @@ router.get('/update', (req, res) => {
   let userId = req.query.userId;
   return adminQueries.placeOrder(userId)
     .then(foods => {
-      console.log('foods: ', foods)
       userQueries.getAdminPhone()
         .then(admin => {
           const adminNum = admin.rows[0].phone
