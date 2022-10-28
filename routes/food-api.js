@@ -75,8 +75,10 @@ router.get('/trash', (req, res) => {
   let userId = req.query.userId;
 
   return pool
-    .query(`UPDATE orders
-        SET submitted = TRUE
+    .query(`DELETE FROM orders
+    WHERE user_id = $2
+    AND food_id = $1
+    RETURNING *;
         ;`, [foodId, userId])
     .then((result) => {
       const output = result.rows[0];
