@@ -23,17 +23,36 @@ const placeOrder = (userid) => {
     WHERE orders.submitted = false AND orders.user_id = ${userid}
     RETURNING u.*,orders.*;`)
     .then(data => {
-      console.log("data from place",data.rows)
+      //console.log("data from place",data.rows)
       return data.rows;
     });
 };
 
-const completeOrder = (userid) => {
+const completeOrder = (orderId) => {
   return db.query(`UPDATE orders
   SET completed = true
-  
-  `)
+  WHERE order_number = ${orderId}
+  RETURNING *;`)
+  .then(data => {
+    console.log("data after completed db",data.rows)
+    return data.rows;
+  });
 }
+
+const deleteCompletedOrder = (orderId) => {
+  return db.query(`DELETE FROM orders
+  WHERE order_number = ${orderId}
+  RETURNING *;`)
+  .then(data => {
+    console.log("DELETED ORDER",data.rows)
+    return data.rows;
+  });
+}
+
+// UPDATE orders
+//   SET completed = true
+//   WHERE order_number = 374;
+
 
 
 const getSubmittedOrders = () => {
@@ -59,5 +78,5 @@ const getSubmittedOrdersByUser = () => {
     });
 };
 
-module.exports = { placeOrder, getSubmittedOrders, getSubmittedOrdersByUser };
+module.exports = { placeOrder, getSubmittedOrders, getSubmittedOrdersByUser, completeOrder, deleteCompletedOrder};
 

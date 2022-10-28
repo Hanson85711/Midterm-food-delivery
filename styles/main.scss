@@ -21,6 +21,9 @@ body {
   a {
     text-decoration: none;
   }
+  button {
+    cursor:pointer;
+  }
 }
 header {
   nav {
@@ -43,9 +46,10 @@ header {
     .cart-button {
       font-size: $font-small-text;
       padding: 0.5em 1em;
-      background-color: $base-color4;
+      background-color: $base-color5;
       border: navajowhite;
       border-radius: 10px;
+      margin-left: 1em;
 
       a {
         color: $font-white;
@@ -156,7 +160,7 @@ main {
     padding: 10px 15px;
     margin: 2em 12rem 2em 0;
     font-size: 20px;
-    background-color: #D35721;
+    background-color: $base-color5;
     border: navajowhite;
     border-radius: 10px;
     color: $font-white;
@@ -166,6 +170,7 @@ main {
     margin-right: 2em;
     text-align: right;
     font-size: 26px;
+    list-style: none;
   }
 
   .cart-title {
@@ -222,9 +227,17 @@ align-items: center;
   border-radius: 2em;
   width: 80%;
   display: inline-flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
   font-size: $font-description;
   align-items: center;
+
+  .admin-button, .admin-delete-button{
+    background: $base-color5;
+    border-radius: 2em;
+    padding: 0.5em 1em;
+    border: none;
+    color:$font-white;
+  }
 }
 #admin-button {
   font-size: 20px;
@@ -234,4 +247,29 @@ align-items: center;
   background: $base-color4;
   color:$font-white
 }
+
+}
+
+.form-inline{
+  display: flex;
+  justify-content: end;
+  margin: auto;
+  width: 70%;
+  font-size: $font-small-text;
+
+  .minutes-form{
+    display: inline-grid;
+
+  .form-control{
+    margin: 1em 0 .5em 0;
+  }
+  }
+
+  .WaitTimebutton {
+    background-color: $base-color5!important;
+    padding: 0.5em 2em;
+    margin: 10px;
+    border-radius: 2em;
+    color:$font-white;
+  }
 }
