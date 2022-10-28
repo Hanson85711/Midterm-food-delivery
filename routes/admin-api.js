@@ -10,7 +10,7 @@ app.use(cookieParser());
 
 const accountSid = process.env.TWILIO_ACCOUNT_SID;
 const authToken = process.env.TWILIO_AUTH_TOKEN;
-const twilioNum = process.env.TWILIO_NUMBER;
+const twilioNum = '+18584375414'
 const testNum = process.env.TEST_NUMBER;
 const client = require('twilio')(accountSid, authToken);
 
@@ -43,7 +43,7 @@ router.post('/', (req, res) => {
         from: twilioNum,
         to: data2[0].phone
       })
-      .then(message => console.log(message.sid))
+      .then(message => console.log('twilio message is a success: ', message.sid))
       .catch(e => console.log(e));
       res.redirect('/')
     })

@@ -7,7 +7,7 @@ const adminQueries = require('../db/queries/adminorders');
 
 const accountSid = process.env.TWILIO_ACCOUNT_SID;
 const authToken = process.env.TWILIO_AUTH_TOKEN;
-const twilioNum = process.env.TWILIO_NUMBER;
+const twilioNum = '+18584375414'
 const testNum = process.env.TEST_NUMBER;
 const client = require('twilio')(accountSid, authToken);
 
@@ -97,13 +97,14 @@ router.get('/update', (req, res) => {
         .then(admin => {
           console.log(admin.rows)
            const adminNum = admin.rows[0].phone
+           console.log('adminnum:', adminNum)
           client.messages
             .create({
               body: `You have received an order from customer ${foods[0].name}. Order Number ${foods[0].order_number}.   Please confirm on admin page. `,
               from: twilioNum,
               to: adminNum
             })
-            .then(message => console.log(message.sid));
+            .then(message => console.log('twilio message is a success: ', message.sid));
           res.json({ foods });
         })
     })
