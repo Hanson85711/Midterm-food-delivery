@@ -1,6 +1,8 @@
 $(document).ready(function() {
   const $adminOrderContainer = $('#admin-main');
   let userId;
+  let buttonsDetails = [];
+  let orderUserIds = [];
 
   //Initial renders of orders from server
   const loadOrdersForAdmin = function() {
@@ -26,19 +28,38 @@ $(document).ready(function() {
 
     const orderNumber = orderObj.order_number;
     const orderUser = orderObj.user_id;
-   // const orderID = orderObj.id;
-console.log("order",orderObj)
+    // const orderID = orderObj.id;
+    console.log("order",orderObj)
     userId = orderObj.user_id;
-
+    orderUserIds.push(userId);
 
     const $orderListing = $(`
     <li class="admin-item">
     <div class="admin-item-name"> ${"Order number: " + orderNumber + "    From: User " + orderUser}</div>
-    <button id= "admin-button">See Order Details</button>
+    <button class= "admin-button" id=${orderNumber}>See Order Details</button>
   </li>
   `);
+    setTimeout(() => {
+      buttonsDetails = document.querySelectorAll('.admin-button');
+      viewOrderDetails();
+    }, 500);
     return $orderListing;
   };
+
+  const viewOrderDetails = function() {
+    for (let index = 0; index < buttonsDetails.length; index++) {
+      buttonsDetails[index].onclick = function() {
+        let orderNum = buttonsDetails[index].id;
+        let userIdURLParam = orderUserIds[index];
+        let url = new URL('localhost:8080/order/detail');
+        let params = new URLSearchParams(url.search);
+        params.append('orderNum', orderNum);
+        params.append('orderUser', userIdURLParam);
+        window.location = '/order/detail?orderNum=' + orderNum + '&orderUser=' + userIdURLParam;
+      }
+    }
+  }
+
 
   const renderOrders = function(foods) {
     // console.log(foods.orders)

@@ -37,6 +37,7 @@ const orderApiRoutes = require('./routes/order-api');
 const widgetApiRoutes = require('./routes/widgets-api');
 const foodApiRoutes = require('./routes/food-api');
 const usersRoutes = require('./routes/users');
+const orderDetailRoutes = require('./routes/orderdetail');
 const foodmenuRoutes = require('./routes/foodmenu');
 const { getUsers } = require('./db/queries/users');
 const adminRoutes = require('./routes/admin');
@@ -52,6 +53,7 @@ app.use('/api/orders', orderApiRoutes);
 app.use('/api/foods', foodApiRoutes);
 app.use('/admin', adminRoutes);
 app.use('/api/admin', adminApiRoutes);
+app.use('/order/detail', orderDetailRoutes)
 
 // Note: mount other resources here, using the same pattern above
 
