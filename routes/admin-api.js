@@ -22,8 +22,7 @@ router.get('/', (req, res) => {
 });
 
 router.post('/', (req, res) => {
-
-  res.status(200)
+  console.log('body: ', req.body)
   res.redirect('/')
 })
 
