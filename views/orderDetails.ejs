@@ -30,7 +30,7 @@
   </div>
 
   <div class ="container">
-    <form class="form-inline" action="/admin" method="POST">
+    <form class="form-inline" action="/api/admin" method="POST">
       <div class="minutes-form">
         <label for="minutes">How many minutes?</label>
           <select class="form-control" id="minutes" name="minutes">
@@ -38,6 +38,8 @@
             <option value="20">20 minutes</option>
             <option value="30">30 minutes</option>
           </select>
+          <input type = 'hidden' name = 'orderNum' value = <%=  %>>
+
         <button type="submit" class="btn btn-primary">Send</button>
       </div>
     </form>
