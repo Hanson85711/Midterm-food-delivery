@@ -59,6 +59,7 @@ router.get('/minus', (req, res) => {
           FROM orders
           WHERE user_id = $2
           AND food_id = $1
+          AND submitted = false
           LIMIT 1)
           RETURNING *;`, [foodId, userId])
     .then((result) => {
@@ -79,7 +80,9 @@ router.get('/trash', (req, res) => {
     .query(`DELETE FROM orders
     WHERE user_id = $2
     AND food_id = $1
-    RETURNING *;`, [foodId, userId])
+    AND submitted = false
+    RETURNING *;
+        ;`, [foodId, userId])
     .then((result) => {
       const output = result.rows[0];
       res.json({ output });

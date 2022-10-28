@@ -7,7 +7,7 @@ $base-color6: #FBA11C;
 $font-white: #fff;
 $font-gray: rgb(80, 78, 78);
 $font-black: #000;
-$font-header: 32px;
+$font-header: 50px;
 $font-description: 24px;
 $font-small-text: 20px;
 $font-extra-small:16px;
@@ -17,6 +17,9 @@ $font-extra-small:16px;
   align-items: center;
 }
 body {
+  background-color: #0c0111d1;
+  background-image: url("https://www.transparenttextures.com/patterns/asfalt-dark.png");
+  /* This is mostly intended for prototyping; please download the pattern and re-host for production environments. Thank you! */
   font-family: monospace;
   a {
     text-decoration: none;
@@ -54,10 +57,20 @@ header {
       a {
         color: $font-white;
       }
+    }.cart-button:hover{
+      outline-style: outset;
+      outline: 5px solid rgb(255, 230, 185);
+      transition: all .4s ease-in-out;
     }
 
     span {
-      color: $font-gray;
+      font-family: monospace;
+      color: white;
+      text-shadow:
+      -1px -1px 0 rgba(255, 255, 255, 0.58),
+      1px -1px 0 rgba(255, 255, 255, 0.475),
+      -1px 1px 0 rgba(251, 251, 251, 0.441),
+      1px 1px 0 rgba(255, 255, 255, 0.284);
       font-size: $font-header;
       font-weight: 600;
       margin-left: 0.5em;
@@ -84,6 +97,11 @@ main {
 
 
   .category-title {
+    text-shadow:
+    -2px -2px 0 rgba(255, 255, 255, 0.58),
+    2px -2px 0 rgba(255, 255, 255, 0.475),
+    -2px 2px 0 rgba(251, 251, 251, 0.441),
+    2px 2px 0 rgba(255, 255, 255, 0.284);
     text-align: center;
     font-size: $font-header;
   }
@@ -97,6 +115,7 @@ main {
     .category-item {
       text-align: center;
       list-style: none;
+      background-color: rgba(244, 214, 255, 0.412);
       border: 1px #d7d7d7 solid;
       margin: 2em;
       padding: 3em;
@@ -138,8 +157,11 @@ main {
       transition: all .4s ease-in-out;
     }
       .menu-button:hover {
+        outline-style: outset;
+        outline: 5px solid rgb(255, 230, 185);
         background-position: 100% 0;
         transition: all .4s ease-in-out;
+
 
     }
   }
@@ -164,6 +186,10 @@ main {
     border: navajowhite;
     border-radius: 10px;
     color: $font-white;
+  } #place-order:hover {
+    outline-style: outset;
+    outline: 5px solid rgb(255, 230, 185);
+    transition: all .4s ease-in-out;
   }
 
   .order {
@@ -178,6 +204,7 @@ main {
   }
 
   .cart-item {
+    background-color: rgba(244, 214, 255, 0.412);
     list-style: none;
     border: 1px #bfb8b8 solid;
     border-radius: 10px;
@@ -187,7 +214,7 @@ main {
     justify-content: space-around;
     font-size: 20px;
     align-items: center;
-    box-shadow: 7px 7px #e8dcdc;
+    box-shadow: 7px 7px #fae6e67b;
   }
 
   .cart-item-image {
@@ -211,6 +238,7 @@ main {
   }
 }
 .admin-header{
+  color: white;
   text-align: center;
 }
 #admin-main{
@@ -222,6 +250,7 @@ align-items: center;
 .admin-item {
   list-style: none;
   border: 1px #c5c0c0  solid;
+  background-color: rgba(255, 232, 255, 0.339);
   margin: 2em;
   padding: 2em;
   border-radius: 2em;
