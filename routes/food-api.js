@@ -93,16 +93,15 @@ router.get('/update', (req, res) => {
   let userId = req.query.userId;
   return adminQueries.placeOrder(userId)
     .then(foods => {
-      console.log('foods: ', foods)
       userQueries.getAdminPhone()
         .then(admin => {
           console.log(admin.rows)
-          const adminNum = admin.rows[0].phone
+           const adminNum = admin.rows[0].phone
           client.messages
             .create({
               body: `You have received an order from customer ${foods[0].name}. Order Number ${foods[0].order_number}.   Please confirm on admin page. `,
               from: twilioNum,
-              to: adminNum
+              to: "+16043630479"
             })
             .then(message => console.log(message.sid));
           res.json({ foods });
@@ -115,14 +114,6 @@ router.get('/update', (req, res) => {
     });
 });
 
-// Twilio function to send SMS to Admin
-// client.messages
-//   .create({
-//     body: `You have received an order from customer ${foods[0].name}. Order Number ${foods[0].order_number}.   Please confirm on admin page. `,
-//     from: twilioNum,
-//     to: testNum
-//   })
-//   .then(message => console.log(message.sid));
 
 module.exports = router;
 
