@@ -2,7 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const router = express.Router();
 const foodQueries = require('../db/queries/foods');
-const adminPhone = require('../db/queries/users');
+const userQueries = require('../db/queries/users');
 const adminQueries = require('../db/queries/adminorders');
 
 const accountSid = process.env.TWILIO_ACCOUNT_SID;
@@ -93,6 +93,7 @@ router.get('/update', (req, res) => {
     .then(foods => {
       userQueries.getAdminPhone()
         .then(admin => {
+          console.log(admin.rows)
           const adminNum = admin.rows[0].phone
           client.messages
             .create({
