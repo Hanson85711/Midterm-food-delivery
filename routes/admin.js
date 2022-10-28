@@ -11,7 +11,7 @@ const router  = express.Router();
 
 
 router.get('/', (req, res) => {
-  res.render('admin');
+  res.redirect('/login/:userId');
 });
 module.exports = router;
 

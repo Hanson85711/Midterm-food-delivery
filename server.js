@@ -51,7 +51,7 @@ app.use('/users', usersRoutes);
 app.use('/testfoods', foodmenuRoutes);
 app.use('/api/orders', orderApiRoutes);
 app.use('/api/foods', foodApiRoutes);
-app.use('/admin', adminRoutes);
+// app.use('/admin', adminRoutes);
 app.use('/api/admin', adminApiRoutes);
 app.use('/order/detail', orderDetailRoutes)
 
@@ -78,7 +78,9 @@ app.get('/', async (req, res) => {
   if(type === 'admin'){
     res.render('admin',templateVars)
   }
-  res.render('index', templateVars);
+  else {
+    res.render('index', templateVars);
+  }
 });
 
 
