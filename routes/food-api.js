@@ -99,7 +99,7 @@ router.get('/update', (req, res) => {
             .create({
               body: `You have received an order from customer ${foods[0].name}. Order Number ${foods[0].order_number}.   Please confirm on admin page. `,
               from: twilioNum,
-              to: "+16043630479"
+              to: "+"
             })
             .then(message => console.log(message.sid));
           res.json({ foods });
